@@ -19,7 +19,7 @@ If you haven’t installed PostgreSQL yet, follow these steps:
 
    - **pgAdmin**: Open pgAdmin and connect to your PostgreSQL server using the username and password you set.
    - **Command Line**: Open your terminal or command prompt and connect by running:
-     `'`'`' psql -U your_username `'`'`'
+     ``` psql -U your_username ```
    - Replace `your_username` with the PostgreSQL username you created.
 
 ## **Step 2: Create a New Database in PostgreSQL**
@@ -31,7 +31,7 @@ If you haven’t installed PostgreSQL yet, follow these steps:
 2. **Using Command Line**:
 
    - If you’re connected to PostgreSQL via the command line, run:
-     `'`'`' CREATE DATABASE scheduling_app; `'`'`'
+     ``` CREATE DATABASE scheduling_app; ```
    - Replace `scheduling_app` with your preferred database name.
 
 Now, your PostgreSQL database is ready for use!
@@ -41,10 +41,10 @@ Now, your PostgreSQL database is ready for use!
 ## **Step 3: Set Up Prisma in Your Project**
 
 Navigate to your backend project directory:
-`'`'`' cd Simanit/server `'`'`'
+``` cd Simanit/server ```
 
 Initialize Prisma:
-`'`'`' pnpm prisma init `'`'`'
+``` pnpm prisma init ```
 
 This will create a `prisma/` folder containing `schema.prisma` and a `.env` file for environment variables.
 
@@ -54,7 +54,7 @@ This will create a `prisma/` folder containing `schema.prisma` and a `.env` file
 
 1. Open the `.env` file in the root of your project.
 2. Set the `DATABASE_URL` variable to connect to your PostgreSQL database. Use the following format:
-   `'`'`' DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/scheduling_app" `'`'`'
+   ``` DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/scheduling_app" ```
 
    Replace:
 
@@ -68,7 +68,7 @@ This will create a `prisma/` folder containing `schema.prisma` and a `.env` file
 
 Open `prisma/schema.prisma` and ensure the datasource provider is set to PostgreSQL:
 
-`'`'`'
+```
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -77,7 +77,7 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
-`'`'`'
+```
 
 ---
 
@@ -85,7 +85,7 @@ generator client {
 
 To generate the Prisma Client, which will let you query your database, run:
 
-`'`'`' pnpm prisma generate `'`'`'
+``` pnpm prisma generate ```
 
 ---
 
@@ -93,11 +93,11 @@ To generate the Prisma Client, which will let you query your database, run:
 
 If your database is empty, you can define models directly in `schema.prisma`. Here’s an example model for a `User`:
 
-`'`'`' model User {   id        Int      @id @default(autoincrement())   email     String   @unique   name      String?   createdAt DateTime @default(now()) } `'`'`'
+``` model User {   id        Int      @id @default(autoincrement())   email     String   @unique   name      String?   createdAt DateTime @default(now()) } ```
 
 After defining models, apply the changes to your database:
 
-`'`'`' pnpm prisma migrate dev --name init `'`'`'
+``` pnpm prisma migrate dev --name init ```
 
 ---
 
@@ -105,7 +105,7 @@ After defining models, apply the changes to your database:
 
 If you already have tables in your PostgreSQL database and want Prisma to use them, run:
 
-`'`'`' pnpm prisma db pull `'`'`'
+``` pnpm prisma db pull ```
 
 This will introspect your existing database and update `schema.prisma` with the current structure.
 
@@ -114,16 +114,15 @@ This will introspect your existing database and update `schema.prisma` with the 
 ## **Summary of Commands**
 
 1. **Initialize Prisma**:
-   `'`'`' pnpm prisma init `'`'`'
+   ``` pnpm prisma init ```
 2. **Set the Database URL**:
-   `'`'`' DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/scheduling_app" `'`'`'
+   ``` DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/scheduling_app" ```
 3. **Generate Prisma Client**:
-   `'`'`' pnpm prisma generate `'`'`'
+   ``` pnpm prisma generate ```
 4. **Run Migrations** (if you added models to `schema.prisma`):
-   `'`'`' pnpm prisma migrate dev --name init `'`'`'
+   ``` pnpm prisma migrate dev --name init ```
 
 ---
-
 
 PS C:\Simanit\server> pnpm prisma init
 
